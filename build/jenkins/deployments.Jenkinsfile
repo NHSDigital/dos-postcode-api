@@ -4,7 +4,9 @@ pipeline {
     /*
         Description: Unified pipeline to deploy to various environments
     */
-    agent any
+    agent {
+        label 'jenkins-agent-local'
+    }
 
     options {
         buildDiscarder(logRotator(daysToKeepStr: '7', numToKeepStr: '13'))
