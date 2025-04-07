@@ -4,9 +4,9 @@ import static uk.nhs.digital.uec.api.constants.SwaggerConstants.NAME_DESC;
 import static uk.nhs.digital.uec.api.constants.SwaggerConstants.POSTCODES_DESC;
 import static uk.nhs.digital.uec.api.exception.ErrorMessageEnum.NO_PARAMS_PROVIDED;
 
-import io.swagger.annotations.ApiParam;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -38,9 +38,9 @@ public class PostcodeMappingController {
 
   @GetMapping()
   public ResponseEntity<List<PostcodeMapping>> getPostcodeMapping(
-      @ApiParam(POSTCODES_DESC) @RequestParam(name = "postcodes", required = false)
+      @Parameter(description = POSTCODES_DESC) @RequestParam(name = "postcodes", required = false)
           List<String> postCodes,
-      @ApiParam(NAME_DESC) @RequestParam(name = "name", required = false) String name)
+      @Parameter(description =NAME_DESC) @RequestParam(name = "name", required = false) String name)
       throws InvalidPostcodeException, InvalidParameterException, NotFoundException {
     long start  = System.currentTimeMillis();
     List<PostcodeMapping> postcodeMapping = null;

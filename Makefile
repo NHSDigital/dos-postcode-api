@@ -15,8 +15,8 @@ prepare: ## Prepare environment
 pipeline-prepare:
 	sh $(PROJECT_DIR)scripts/assume_role.sh $(JENKINS_ENV) $(JENKINS_SERVICE_TEAM)
 
-pipeline-slave-prepare:
-	# the jenkins-slave build agents don't have the docker daemon immediately available, let us wait for it
+jenkins-agent-local-prepare:
+	# the jenkins-agent-local build agents don't have the docker daemon immediately available, let us wait for it
 	timeout 60 bash -c 'while ! docker info &>/dev/null; do sleep 1; done' || exit 1
 
 compile:
@@ -43,10 +43,10 @@ build: project-config
 		CMD="clean verify install \
 		-Dsonar.verbose=true \
 		-Dsonar.host.url='https://sonarcloud.io' \
-		-Dsonar.organization='nhsd-exeter' \
-		-Dsonar.projectKey='uec-dos-api-pca' \
+		-Dsonar.organization='nhsdigital' \
+		-Dsonar.projectKey='uec-dos-sf-api-pca' \
 		-Dsonar.projectName='DoS Postcode API' \
-		-Dsonar.login='$$(make secret-fetch NAME=service-finder-sonar-pass | jq .SONAR_HOST_TOKEN | tr -d '"' || exit 1)' \
+		-Dsonar.token='$$(make secret-fetch NAME=service-finder-sonar-pass | jq .SONAR_HOST_TOKEN | tr -d '"' || exit 1)' \
 		-Dsonar.sourceEncoding='UTF-8' \
 		-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco \
 		-Dsonar.exclusions='src/main/java/**/config/*.*,src/main/java/**/model/*.*,src/main/java/**/exception/*.*,src/main/java/**/constants/*.*,src/main/java/**/interceptor/*.*,src/test/**/*.*,src/main/java/**/filter/*.*,src/main/java/**/PostcodeMappingApplication.*' \

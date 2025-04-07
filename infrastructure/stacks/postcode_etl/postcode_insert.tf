@@ -2,7 +2,7 @@
 resource "aws_lambda_function" "postcode_insert_lambda" {
   filename         = data.archive_file.postcode_insert_function.output_path
   function_name    = local.postcode_insert_function_name
-  layers           = ["arn:aws:lambda:eu-west-2:336392948345:layer:AWSSDKPandas-Python38:13"]
+  layers           = ["arn:aws:lambda:eu-west-2:336392948345:layer:AWSSDKPandas-Python39:28"]
   description      = local.postcode_insert_description
   role             = aws_iam_role.postcode_insert_lambda_role.arn
   handler          = "postcode_insert.lambda_handler"

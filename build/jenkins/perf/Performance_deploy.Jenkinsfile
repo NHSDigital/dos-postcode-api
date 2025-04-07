@@ -3,7 +3,7 @@ pipeline {
     Description: Deployment pipeline
    */
 
-  agent { label 'jenkins-slave' }
+  agent { label 'jenkins-agent-local' }
 
   options {
     buildDiscarder(logRotator(daysToKeepStr: '7', numToKeepStr: '13'))
@@ -35,10 +35,10 @@ pipeline {
         }
       }
     }
-    stage('Prepare for jenkins-slave run') {
+    stage('Prepare for jenkins-agent-local run') {
       steps {
         script {
-          sh "make pipeline-slave-prepare"
+          sh "make jenkins-agent-local-prepare"
         }
       }
     }
@@ -122,7 +122,7 @@ pipeline {
     }
     stage('Nominal Test') {
       agent {
-        label 'jenkins-slave'
+        label 'jenkins-agent-local'
       }
       steps {
         script {
@@ -137,7 +137,7 @@ pipeline {
     }
     stage('Peak Test') {
       agent {
-        label 'jenkins-slave'
+        label 'jenkins-agent-local'
       }
       steps {
         script {
@@ -152,7 +152,7 @@ pipeline {
     }
     stage('Double Peak Test') {
       agent {
-        label 'jenkins-slave'
+        label 'jenkins-agent-local'
       }
       steps {
         script {
@@ -167,7 +167,7 @@ pipeline {
     }
     stage('Burst Norminal Test') {
       agent {
-        label 'jenkins-slave'
+        label 'jenkins-agent-local'
       }
       steps {
         script {
@@ -182,7 +182,7 @@ pipeline {
     }
     stage('Burst Peak Test') {
       agent {
-        label 'jenkins-slave'
+        label 'jenkins-agent-local'
       }
       steps {
         script {
@@ -197,7 +197,7 @@ pipeline {
     }
     stage('Burst Double Peak Test') {
       agent {
-        label 'jenkins-slave'
+        label 'jenkins-agent-local'
       }
       steps {
         script {

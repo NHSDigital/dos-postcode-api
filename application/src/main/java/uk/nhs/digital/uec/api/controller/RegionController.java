@@ -3,9 +3,10 @@ package uk.nhs.digital.uec.api.controller;
 import static uk.nhs.digital.uec.api.constants.SwaggerConstants.POSTCODES_DESC;
 import static uk.nhs.digital.uec.api.constants.SwaggerConstants.POSTCODE_DESC;
 
-import io.swagger.annotations.ApiParam;
 import java.util.List;
 import java.util.Map;
+
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,7 +43,7 @@ public class RegionController {
   @GetMapping(params = {"postcodes"})
   @PreAuthorize("hasAnyRole('POSTCODE_API_ACCESS')")
   public ResponseEntity getRegionDetailsByPostCodes(
-      @ApiParam(POSTCODES_DESC) @RequestParam(name = "postcodes", required = false)
+    @Parameter(description = POSTCODES_DESC) @RequestParam(name = "postcodes", required = false)
           List<String> postcodes) {
     try {
       long start = System.currentTimeMillis();
@@ -75,7 +76,7 @@ public class RegionController {
   @GetMapping(params = {"postcode"})
   @PreAuthorize("hasAnyRole('POSTCODE_API_ACCESS')")
   public ResponseEntity getRegionDetailsByPostCode(
-      @ApiParam(POSTCODE_DESC) @RequestParam(name = "postcode", required = false) String postcode) {
+      @Parameter(description = POSTCODE_DESC) @RequestParam(name = "postcode", required = false) String postcode) {
     PostcodeMapping postcodeMapping = new PostcodeMapping();
     postcodeMapping.setPostcode(postcode);
     try {

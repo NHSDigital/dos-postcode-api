@@ -65,7 +65,7 @@ resource "aws_lambda_function" "postcode_etl_sns_lambda" {
   role             = aws_iam_role.postcode_etl_sns_role.arn
   handler          = "postcode_etl_sns.lambda_handler"
   source_code_hash = data.archive_file.postcode_etl_sns_function.output_base64sha256
-  runtime          = "python3.8"
+  runtime          = "python3.9"
   publish          = false
   tags             = local.standard_tags
   environment {

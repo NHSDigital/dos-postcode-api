@@ -3,7 +3,7 @@ pipeline {
     Description: Development pipeline to build test push and deploy to nonprod
    */
   agent {
-    label 'jenkins-slave'
+    label 'jenkins-agent-local'
   }
 
   environment {
@@ -20,10 +20,10 @@ pipeline {
   triggers { pollSCM('* * * * *') }
 
   stages {
-    stage('Prepare for jenkins-slave run') {
+    stage('Prepare for jenkins-agent-local run') {
       steps {
         script {
-          sh "make pipeline-slave-prepare"
+          sh "make jenkins-agent-local-prepare"
         }
       }
     }

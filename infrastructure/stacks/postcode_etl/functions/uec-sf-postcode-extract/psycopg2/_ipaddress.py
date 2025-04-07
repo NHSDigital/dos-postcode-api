@@ -4,7 +4,7 @@
 # psycopg/_ipaddress.py - Ipaddres-based network types adaptation
 #
 # Copyright (C) 2016-2019 Daniele Varrazzo  <daniele.varrazzo@gmail.com>
-# Copyright (C) 2020 The Psycopg Team
+# Copyright (C) 2020-2021 The Psycopg Team
 #
 # psycopg2 is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published
@@ -24,8 +24,8 @@
 # FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
 # License for more details.
 
-from psycopg2.extensions import new_type, new_array_type, register_type, register_adapter, QuotedString
-from psycopg2.compat import text_type
+from psycopg2.extensions import (
+    new_type, new_array_type, register_type, register_adapter, QuotedString)
 
 # The module is imported on register_ipaddress
 ipaddress = None
@@ -58,16 +58,17 @@ def register_ipaddress(conn_or_curs=None):
     for c in _casters:
         register_type(c, conn_or_curs)
 
-    for t in [ipaddress.IPv4Interface, ipaddress.IPv6Interface, ipaddress.IPv4Network, ipaddress.IPv6Network]:
+    for t in [ipaddress.IPv4Interface, ipaddress.IPv6Interface,
+              ipaddress.IPv4Network, ipaddress.IPv6Network]:
         register_adapter(t, adapt_ipaddress)
 
 
 def _make_casters():
-    inet = new_type((869,), "INET", cast_interface)
-    ainet = new_array_type((1041,), "INET[]", inet)
+    inet = new_type((869,), 'INET', cast_interface)
+    ainet = new_array_type((1041,), 'INET[]', inet)
 
-    cidr = new_type((650,), "CIDR", cast_network)
-    acidr = new_array_type((651,), "CIDR[]", cidr)
+    cidr = new_type((650,), 'CIDR', cast_network)
+    acidr = new_array_type((651,), 'CIDR[]', cidr)
 
     return [inet, ainet, cidr, acidr]
 
@@ -76,13 +77,13 @@ def cast_interface(s, cur=None):
     if s is None:
         return None
     # Py2 version force the use of unicode. meh.
-    return ipaddress.ip_interface(text_type(s))
+    return ipaddress.ip_interface(str(s))
 
 
 def cast_network(s, cur=None):
     if s is None:
         return None
-    return ipaddress.ip_network(text_type(s))
+    return ipaddress.ip_network(str(s))
 
 
 def adapt_ipaddress(obj):

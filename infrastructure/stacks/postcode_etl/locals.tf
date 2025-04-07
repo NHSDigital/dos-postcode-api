@@ -3,32 +3,32 @@ locals {
   postcode_service_account_policy_name = "${var.service_prefix}-policy"
   postcode_insert_function_name        = "${var.service_prefix}-postcode-insert"
   postcode_insert_description          = "Service Finder function to insert postcode and postcode mappings into DynamoDB"
-  postcode_insert_runtime              = "python3.8"
+  postcode_insert_runtime              = "python3.9"
   postcode_insert_timeout              = 900
   postcode_insert_memory_size          = 2048
 
   postcode_extract_function_name = "${var.service_prefix}-postcode-extract"
   postcode_extract_description   = "Service Finder function to extract postcode and postcode mapping from DoS database into csv files"
-  postcode_extract_runtime       = "python3.8"
+  postcode_extract_runtime       = "python3.9"
   postcode_extract_timeout       = 900
   postcode_extract_memory_size   = 2048
   # postcode_extract_core_dos_python_libs_arn = data.aws_lambda_layer_version.dos_python_libs.arn
 
   region_update_function_name = "${var.service_prefix}-region-update"
   region_update_description   = "Service finder function to update postcode mappings with region and subregions"
-  region_update_runtime       = "python3.8"
+  region_update_runtime       = "python3.9"
   region_update_timeout       = 900
   region_update_memory_size   = 2048
 
   email_update_function_name = "${var.service_prefix}-email-update"
   email_update_description   = "Service finder function to update postcode mappings with email and ICBs"
-  email_update_runtime       = "python3.8"
+  email_update_runtime       = "python3.9"
   email_update_timeout       = 900
   email_update_memory_size   = 2048
 
   file_generator_function_name = "${var.service_prefix}-ccg-file-generator"
   file_generator_description   = "Service finder function to generate ccg csv from pcodey files"
-  file_generator_runtime       = "python3.8"
+  file_generator_runtime       = "python3.9"
   file_generator_timeout       = 900
   file_generator_memory_size   = 2048
 

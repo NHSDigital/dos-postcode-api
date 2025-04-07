@@ -2,7 +2,7 @@ pipeline {
   /*
     Description: Deployment pipeline
    */
-  agent { label 'jenkins-slave' }
+  agent { label 'jenkins-agent-local' }
 
   options {
     buildDiscarder(logRotator(daysToKeepStr: '7', numToKeepStr: '13'))
