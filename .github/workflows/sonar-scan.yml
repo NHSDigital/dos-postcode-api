@@ -25,7 +25,7 @@ jobs:
         run: mvn clean verify
 
       - name: SonarCloud Scan
-        run: mvn sonar:sonar -Dsonar.projectKey=uec-dos-api-pca -Dsonar.organization=nhsd-exeter -Dsonar.java.binaries=target/classes -Dsonar.coverage.exclusions=src/main/java/**/config/*.*,src/main/java/**/model/*.*,src/main/java/**/exception/*.*,src/main/java/**/constants/*.*,src/main/java/**/interceptor/*.*,src/test/**/*.*,src/main/java/**/filter/*.*,src/main/java/**/PostcodeMappingApplication.* -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+        run: mvn sonar:sonar -Dsonar.projectKey=uec-dos-sf-api-pca -Dsonar.organization=nhsdigital -Dsonar.java.binaries=target/classes -Dsonar.coverage.exclusions=src/main/java/**/config/*.*,src/main/java/**/model/*.*,src/main/java/**/exception/*.*,src/main/java/**/constants/*.*,src/main/java/**/interceptor/*.*,src/test/**/*.*,src/main/java/**/filter/*.*,src/main/java/**/PostcodeMappingApplication.* -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
