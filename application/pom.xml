@@ -25,7 +25,7 @@
     dependencies to use the latest version -->
     <spring-security-oauth2-autoconfigure.version>2.6.8</spring-security-oauth2-autoconfigure.version>
     <java-jwt.version>3.19.4</java-jwt.version>
-    <commons-io.version>2.15.1</commons-io.version>
+    <commons-io.version>2.19.0</commons-io.version>
     <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
     <opencsv.version>4.6</opencsv.version>
   </properties>
